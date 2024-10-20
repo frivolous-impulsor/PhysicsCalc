@@ -61,7 +61,8 @@ def Q2D():
     phi = e*2.02
     return phi/eV
     
-
+def Q3A():
+    return 0
 
 def main():
     printNum(Q2D(), "result")    
