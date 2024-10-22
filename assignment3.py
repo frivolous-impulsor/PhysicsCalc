@@ -1,5 +1,5 @@
 from decimal import Decimal
-from math import pi, sqrt
+from math import pi, sqrt, cos, acos, sin, asin 
 
 WIEN_CONSTANT: float = 2.8978 * 10**-3
 SPEED_OF_LIGHT = 3*10**8
@@ -7,6 +7,7 @@ eV = 1.602*10**-19
 
 m_e = 9.11*10**-31
 e = 1.6*10**-19
+h = 6.63*10**-34
 
 def printNum(num: float, name: str):
     print(name, end=": ")
@@ -60,11 +61,61 @@ def Q2C():
 def Q2D():
     phi = e*2.02
     return phi/eV
+
+
+Angs = 1*10**-10
     
 def Q3A():
-    return 0
+    lambdaInit: float = 0.539 * Angs
+    lambdaFinal: float = 0.557 * Angs
+    deltaLambda: float = lambdaFinal - lambdaInit
+    lambdaC: float = 2.42*10**-12
+    temp: float = 1-(deltaLambda/lambdaC)
+    result = acos(temp)
+    
+    return result
+
+def Q3B():
+    lambdaInit: float = 0.539 * Angs
+    lambdaFinal: float = 0.557 * Angs
+    GammaU = h*(1/lambdaInit - 1/lambdaFinal)/(m_e*SPEED_OF_LIGHT)+1
+    u = sqrt(1-1/(GammaU**2))*SPEED_OF_LIGHT
+    temp = h/lambdaFinal*sin(Q3A())/(GammaU*m_e*u)
+    result = asin(temp)
+    return result * 180/pi
+
+m_p = 1.67*10**-27
+
+
+def Q4A():
+    return h/(2*m_p*SPEED_OF_LIGHT)
+
+def Q4B():
+    u = 0.8*SPEED_OF_LIGHT
+    GammaU = 1/(sqrt(1-0.8**2))
+    printNum(GammaU, "gammaU")
+    return h/(2*GammaU*m_p*SPEED_OF_LIGHT)
+
+m_Pb = 207.2 * 1.66*10**-27
+def Q4C1():
+    lambdaA = Q4A()
+    u_Pb = h/(lambdaA*m_Pb)
+    K_Pb = 0.5 * m_Pb * (u_Pb**2)
+    E_photon = h*SPEED_OF_LIGHT/lambdaA
+    return K_Pb/E_photon
+
+def Q4C2():
+    lambdaB = Q4B()
+    u_Pb = h/(lambdaB*m_Pb)
+    printNum(u_Pb, "u of lead")
+    K_Pb = 0.5 * m_Pb * (u_Pb**2)
+    printNum(K_Pb, "K of lead")
+    E_photon = h*SPEED_OF_LIGHT/lambdaB
+    printNum(E_photon, "engergy of gamma")
+    return K_Pb/E_photon
+
 
 def main():
-    printNum(Q2D(), "result")    
+    printNum(Q4C2(), "result")
 
 main()
