@@ -114,8 +114,16 @@ def Q4C2():
     printNum(E_photon, "engergy of gamma")
     return K_Pb/E_photon
 
+micro = 10**-6
+nano = 10**-9
+
+SLIT_WIDTH = 2.5 * micro
+def Q5A():
+    lambdaV = 500 * nano
+    
+
 
 def main():
-    printNum(Q4C2(), "result")
+    printNum(Q5A(), "result")
 
 main()
