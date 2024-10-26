@@ -118,12 +118,27 @@ micro = 10**-6
 nano = 10**-9
 
 SLIT_WIDTH = 2.5 * micro
-def Q5A():
-    lambdaV = 500 * nano
-    
+def Q5AB(wavelengthNM):
+    lambdaVal = wavelengthNM * nano
+    angle = asin(lambdaVal/SLIT_WIDTH)
+    result = 2*angle*180/pi
+    return result
+
+def Q5C():
+    E_per_area = 8.33*10**-15
+    return (SLIT_WIDTH/SPEED_OF_LIGHT, E_per_area) 
+
+E_per_area = Q5C()[1]
+def Q5D12(wavelengthNM):
+    lambdaVal = wavelengthNM * nano
+    E_photon = h*SPEED_OF_LIGHT/lambdaVal
+    printNum(E_photon, "energy of single photon")
+    numPhoton = E_per_area/E_photon
+    return numPhoton
+
 
 
 def main():
-    printNum(Q5A(), "result")
+    printNum(Q5D12(0.15), "number of photons")
 
 main()
